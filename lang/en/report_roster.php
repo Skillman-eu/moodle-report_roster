@@ -70,4 +70,6 @@ $string['size:small'] = 'Small';
 $string['size:medium'] = 'Medium';
 $string['size:large'] = 'Large';
 $string['webmode'] = 'Web report';
-
+// Skillman.
+$string['param:skillman'] = 'Skillman';
+$string['skillmanmembers'] = 'Only Skillman members';

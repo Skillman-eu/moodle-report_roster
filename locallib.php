@@ -100,6 +100,9 @@ function report_roster_output_action_buttons($id, $url, $params) {
     global $OUTPUT;
 
     $options = array();
+    $options['skillman']   = array(
+        0 => get_string('allusers', 'report_roster'),
+        1 => get_string('skillmanmembers', 'report_roster'));
     $options['mode']   = array(
         ROSTER_MODE_DISPLAY => get_string('webmode', 'report_roster'),
         ROSTER_MODE_PRINT => get_string('printmode', 'report_roster'));
