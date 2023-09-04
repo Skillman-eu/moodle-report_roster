@@ -29,6 +29,7 @@ $id       = required_param('id', PARAM_INT);
 $mode     = optional_param('mode', ROSTER_MODE_DISPLAY, PARAM_TEXT);
 $group    = optional_param('group', 0, PARAM_INT);
 $role     = optional_param('role', 0, PARAM_INT);
+$skillman = optional_param('skillman', 0, PARAM_INT);
 $autosize = report_roster_resolve_auto_size();
 $size     = optional_param('size', $autosize, PARAM_INT);
 $course   = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
@@ -79,6 +80,12 @@ foreach ($userlist as $user) {
     if (in_array($user->id, $suspended)) {
         continue;
     }
+    // Skip if Skillman_only filter is applied but user is NOT a Skillman member.
+	if ($skillman) {
+        if (!$DB->record_exists('block_skillman_members', ['moodleuserid'=>$user->id])) {
+            continue;
+        }
+	}
 
     // Get user picture and profile data.
     $item = $OUTPUT->user_picture($user, array('size' => $size, 'courseid' => $course->id));
@@ -103,6 +110,7 @@ echo $OUTPUT->header();
 echo html_writer::tag('button', get_string('learningmodeoff', 'report_roster'), array('id' => 'report-roster-toggle'));
 
 $currentparams = array(
+    'skillman' => $skillman,
     'group' => $group,
     'role'  => $role,
     'size'  => $size,
