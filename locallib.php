@@ -52,7 +52,7 @@ function report_roster_get_options_role($id) {
     global $USER;
 
     $context       = context_course::instance($id);
-    $rolesfromdb   = get_roles_used_in_context($context);
+    $rolesfromdb   = get_roles_used_in_context($context, false);// Skillman - force current (course) roles only!
     $viewableroles = get_viewable_roles($context, $USER->id);
 
     $roles = array(0 => get_string('allusers', 'report_roster'));
