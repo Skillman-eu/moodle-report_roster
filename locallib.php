@@ -202,6 +202,9 @@ function report_roster_profile_fields_query() {
     foreach ($fieldsconfig as $field) {
         $field = trim($field);
 
+        if ($field == 'fullname') {
+            continue;
+        }
         if ( property_exists($USER, $field)) {
             $fields .= ',u.' . $field;
         }
